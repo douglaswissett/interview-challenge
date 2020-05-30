@@ -16,6 +16,12 @@ export default () => {
     }
   }
 
+  const removeMenuItemHandler = (index) => {
+    const modifiedMenu = [...menu];
+    modifiedMenu.splice(index, 1)
+    setMenu(modifiedMenu);
+  }
+
   return (
     <div className="wrapper">
       <div className="menu-summary">
@@ -51,10 +57,12 @@ export default () => {
             <h2>Menu preview</h2>
             <ul className="menu-preview">
              {
-               menu.map(item => (
+               menu.map((item, index) => (
                  <MenuPreview
                   key={item.id}
                   item={item}
+                  index={index}
+                  onRemove={removeMenuItemHandler}
                  />
                ))
              }
