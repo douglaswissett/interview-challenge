@@ -24,6 +24,22 @@ export default () => {
 
   const calculateTotalSelectedItems = () => `${menu.length} items`;
 
+  const calculateTotalDietaryItems = () => {
+    const total = menu.map(item => item.dietaries).flat();
+
+    const counts = {};
+    for (let i = 0; i < total.length; i++) {
+        counts[total[i]] = 1 + (counts[total[i]] || 0);
+    }
+
+    return Object.keys(counts).map(key => (
+      <React.Fragment key={key}>
+        {counts[key]}x
+        <span className="dietary">{key}</span>
+      </React.Fragment>
+    ));
+  }
+
   return (
     <div className="wrapper">
       <div className="menu-summary">
@@ -33,13 +49,7 @@ export default () => {
               <span>{ calculateTotalSelectedItems() }</span>
             </div>
             <div className="col-6 menu-summary-right">
-
-
-              6x <span className="dietary">ve</span>
-              4x <span className="dietary">v</span>
-              12x <span className="dietary">n!</span>
-
-
+              { calculateTotalDietaryItems() }
             </div>
           </div>
         </div>
