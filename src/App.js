@@ -8,6 +8,14 @@ import data from './items';
 
 
 export default () => {
+  const [menu, setMenu] = useState([]);
+
+  const addMenuItemHandler = (item) => {
+    if (menu.findIndex(i => i.id === item.id) < 0) {
+      setMenu([...menu, item]);
+    }
+  }
+
   return (
     <div className="wrapper">
       <div className="menu-summary">
@@ -33,6 +41,7 @@ export default () => {
                 <ItemPicker
                   key={item.id}
                   item={item}
+                  onClick={addMenuItemHandler}
                 />
               ))
             }
@@ -41,7 +50,14 @@ export default () => {
           <div className="col-8">
             <h2>Menu preview</h2>
             <ul className="menu-preview">
-              <MenuPreview />
+             {
+               menu.map(item => (
+                 <MenuPreview
+                  key={item.id}
+                  item={item}
+                 />
+               ))
+             }
             </ul>
           </div>
         </div>

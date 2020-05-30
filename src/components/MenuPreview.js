@@ -2,11 +2,13 @@ import React from 'react';
 
 export default (props) => (
   <li className="item">
-    <h2>Dummy item</h2>
+    <h2>{ props.item.name }</h2>
     <p>
-      <span className="dietary">ve</span>
-      <span className="dietary">v</span>
-      <span className="dietary">n!</span>
+      {
+        props.item.dietaries.map(dietary => (
+          <span className="dietary" key={dietary}>{ dietary }</span>
+        ))
+      }
     </p>
     <button className="remove-item">x</button>
   </li>
